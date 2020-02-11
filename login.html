@@ -14,14 +14,14 @@
 
 <body id="admin">
   <div class="container">
-    <form>
+    <form action="auth" method="POST">
       <div class="form-group">
-        <label for="exampleInputEmail1">Username:</label>
-        <input type="text" class="form-control" id="user" required>
+        <label for="user">Username:</label>
+        <input type="text" name="username" placeholder="Username" class="form-control" required>
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">Password:</label>
-        <input type="password" class="form-control" id="password" required>
+        <label for="password">Password:</label>
+        <input type="password" name="password" placeholder="Password" class="form-control" required>
       </div>
       <div class="form-group form-check">
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
