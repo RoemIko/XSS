@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset=”UTF-8″>
-<title>ITSOURCECODE Simple Forum</title>
+<title>PAD9 Forum</title>
 </head>
 <body>
 <h3>ITSOURCECODE Simple Forum in PHP/MYSQL</h3>
@@ -23,5 +23,3 @@ if ($result->num_rows > 0) {
 ?>
 </body>
 </html>
-
-
