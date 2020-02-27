@@ -1,3 +1,6 @@
+<?php
+include 'connection.php';
+?>
 <?php include 'connection.php' ?>
 <!DOCTYPE html>
 <html>
@@ -40,14 +43,18 @@
 <?php
 $sql = "SELECT cat_name FROM categories";
 $result = $conn->query($sql);
-     echo  "<a class="nav-item nav-link">". $row["cat_name"] ."</a>";
+$i = 0;
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "<a class=\"nav-item nav-link cat" . $i . "\" href=\"board.php\">". $row["cat_name"]. "</a>";
+	$i++;
+}
+} else {
+    echo "0 results";
+}
+$conn->close();
        	?>
-	<a class="nav-item nav-link active" href="#">Cat1</a>
-        <a class="nav-item nav-link" href="#">Cat2</a>
-        <a class="nav-item nav-link" href="#">Cat3</a>
-        <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
         <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
       </nav>
     </div>
@@ -57,3 +64,4 @@ $result = $conn->query($sql);
 </body>
 
 </html>
+

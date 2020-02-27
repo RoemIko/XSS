@@ -37,21 +37,49 @@
   <div class="container">
     <div id="content">
       <nav class="nav nav-pills nav-fill">
-<?php
-$sql = "SELECT cat_name FROM categories";
-$result = $conn->query($sql);
-     echo  "<a class="nav-item nav-link">". $row["cat_name"] ."</a>";
-       	?>
-	<a class="nav-item nav-link active" href="#">Cat1</a>
-        <a class="nav-item nav-link" href="#">Cat2</a>
-        <a class="nav-item nav-link" href="#">Cat3</a>
-        <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        <?php
+        $sql = "SELECT cat_name FROM categories";
+        $result = $conn->query($sql);
+        $i = 0;
+        if ($result->num_rows > 0) {
+          // output data of each row
+          while ($row = $result->fetch_assoc()) {
+            echo "<a class=\"nav-item nav-link cat" . $i . "\" href=\"board" . $i . ".php\">" . $row["cat_name"] . "</a>";
+            $i++;
+          }
+        } else {
+          echo "0 results";
+        }
+        ?>
         <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
       </nav>
     </div>
-    <div id="footer">
+    <div id="table">
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Topic</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <?php
+            $sqli = "SELECT topic_subject FROM topics WHERE topic_cat=1";
+            $posts = $conn->query($sqli);
+
+            if ($posts->num_rows > 0) {
+              //output data into html
+              while ($thread = $posts->fetch_assoc()) {
+                echo "<td><a href=\"#\">" . $thread["topic_subject"] . "</a></td>";
+              }
+            } else {
+              echo "0 results";
+            }
+            $conn->close();
+            ?>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </body>
