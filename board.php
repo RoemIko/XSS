@@ -1,6 +1,3 @@
-<?php
-include 'connection.php';
-?>
 <?php include 'connection.php' ?>
 <!DOCTYPE html>
 <html>
@@ -40,28 +37,52 @@ include 'connection.php';
   <div class="container">
     <div id="content">
       <nav class="nav nav-pills nav-fill">
-<?php
-$sql = "SELECT cat_name FROM categories";
-$result = $conn->query($sql);
-$i = 0;
-if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        echo "<a class=\"nav-item nav-link cat" . $i . "\" href=\"board.php\">". $row["cat_name"]. "</a>";
-	$i++;
-}
-} else {
-    echo "0 results";
-}
-$conn->close();
-       	?>
+        <?php
+        $sql = "SELECT cat_id, cat_name FROM categories";
+        $result = $conn->query($sql);
+        $i = 0;
+        if ($result->num_rows > 0) {
+          // output data of each row
+          while ($row = $result->fetch_assoc()) {
+            echo '<a class="nav-item nav-link cat" href="board.php?id='.$row["cat_id"].'">' . $row["cat_name"] . '</a>';
+            $i++;
+          }
+        } else {
+          echo "0 results";
+        }
+        ?>
         <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
       </nav>
     </div>
     <div id="footer">
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Topic</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <?php
+            $id = $_GET["id"];
+            $sqli = "SELECT topic_subject FROM topics WHERE topics.topic_id = " . $id;
+            $posts = $conn->query($sqli); 
+
+            if ($posts->num_rows > 0) {
+              //output data into html
+              while ($thread = $posts->fetch_assoc()) {
+                echo "<td><a href=\"#\">" . $thread["topic_subject"] . "</a></td>";
+              }
+            } else {
+              echo "0 results";
+            }
+            $conn->close();
+            ?>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </body>
 
 </html>
-
