@@ -10,8 +10,8 @@
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: purple;">
-    <a class="navbar-brand" href="#">
-      <img src="" width="30" height="30" class="d-inline-block align-top" alt="">
+    <a class="navbar-brand" href="index.php">
+      <img src="image/Vlogo.png" width="30" height="30" class="d-inline-block align-top" alt="">
       PAD 9 Forum
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,7 +21,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
@@ -44,7 +44,7 @@
         if ($result->num_rows > 0) {
           // output data of each row
           while ($row = $result->fetch_assoc()) {
-            echo '<a class="nav-item nav-link cat" href="board.php?id='.$row["cat_id"].'">' . $row["cat_name"] . '</a>';
+            echo '<a class="nav-item nav-link cat" href="board.php?id=' . $row["cat_id"] . '">' . $row["cat_name"] . '</a>';
             $i++;
           }
         } else {

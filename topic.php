@@ -56,22 +56,22 @@
     </div>
     <div id="footer">
       <table class="table table-dark">
-        <thead>
-          <tr>
-            <th scope="col">Topic</th>
-          </tr>
-        </thead>
         <tbody>
           <tr>
             <?php
+            $i = 0;
             $id = $_GET["id"];
-            $sqli = "SELECT topic_id, topic_subject FROM topics WHERE topics.topic_id = " . $id;
-            $topic = $conn->query($sqli);
-
-            if ($topic->num_rows > 0) {
+            $sqli = "SELECT p.post_id, p.post_content, t.topic_subject FROM posts p, topics t WHERE post_topic = " . $id;
+            $post = $conn->query($sqli);
+            if ($post->num_rows > 0) {
               //output data into html
-              while ($thread = $topic->fetch_assoc()) {
-                echo '<td><a href="topic.php?id=' . $thread["topic_id"] . '">' . $thread["topic_subject"] . '</a></td>';
+              while ($reply = $post->fetch_assoc()) {
+                if ($i == 0) {
+                  echo '<tr><td><p style="color:#ffdb58">Topic:</p> ' . $reply["topic_subject"] . '</td></tr>';
+                  echo '<tr><td style="color:#ffdb58;" >Replies:</td></tr>';
+                  $i = 1;
+                }
+                echo '<td>' . $reply["post_content"] . '</td>';
               }
             } else {
               echo "<td>0 results</td>";
