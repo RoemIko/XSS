@@ -71,7 +71,7 @@
                   echo '<tr><td style="color:#ffdb58;" >Replies:</td></tr>';
                   $i = 1;
                 }
-                echo '<td>' . $reply["post_content"] . '</td>';
+                echo '<tr><td>' . $reply["post_content"] . '</td></tr>';
               }
             } else {
               echo "<td>0 results</td>";
@@ -81,8 +81,16 @@
           </tr>
         </tbody>
       </table>
+      <div>
+        <?php
+        echo '<form method="post" action="reply.php?id=' . $id . '" class="form-dark">';
+        echo '<textarea class="form-text" name="reply-content" required></textarea>';
+        echo '<input class="btn btn-dark" type="submit" value="Submit reply" />';
+        echo '</form>';
+        echo '</div>';
+        ?>
+      </div>
     </div>
-  </div>
 </body>
 
 </html>
